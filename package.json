@@ -9,7 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter @patent/contracts build && pnpm --filter @patent/web build",
+    "build": "pnpm --filter @patent/contracts build && pnpm --filter @patent/db build && pnpm --filter @patent/web build",
     "dev": "pnpm --filter @patent/web dev",
     "typecheck": "pnpm -r typecheck",
     "lint": "biome check .",
@@ -19,5 +19,10 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.13",
     "typescript": "7.0.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

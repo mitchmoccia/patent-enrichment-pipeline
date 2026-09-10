@@ -2,7 +2,15 @@
   "$schema": "https://biomejs.dev/schemas/2.5.13/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
-    "includes": ["**", "!**/dist", "!**/.next", "!**/node_modules", "!docs/handoff", "!**/*.css"]
+    "includes": [
+      "**",
+      "!**/dist",
+      "!**/.next",
+      "!**/node_modules",
+      "!docs/handoff",
+      "!**/*.css",
+      "!**/drizzle"
+    ]
   },
   "formatter": {
     "enabled": true,
