@@ -49,6 +49,34 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
 
+  packages/application:
+    dependencies:
+      '@patent/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@patent/db':
+        specifier: workspace:*
+        version: link:../db
+      drizzle-orm:
+        specifier: 0.45.2
+        version: 0.45.2(@types/pg@8.23.1)(pg@8.23.0)
+      zod:
+        specifier: 4.6.1
+        version: 4.6.1
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.20.2
+      dotenv:
+        specifier: 17.4.2
+        version: 17.4.2
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.7(@types/node@22.20.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.23.13)
+
   packages/contracts:
     dependencies:
       zod:
