@@ -1,0 +1,4 @@
+{
+  "name": "patent-enrichment-pipeline",
+  "install": "bash .cursor/install.sh"
+}
