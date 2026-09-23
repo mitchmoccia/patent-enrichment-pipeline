@@ -10,13 +10,13 @@ export async function POST(
   context: { params: Promise<{ id: string }> },
 ): Promise<NextResponse> {
   const ctx = await getContext();
-  if (!ctx) return NextResponse.redirect(new URL("/sign-in", request.url));
-  if (!(await sessionHasMfa())) return NextResponse.redirect(new URL("/app/mfa", request.url));
+  if (!ctx) return NextResponse.redirect(new URL("/sign-in", request.url), 303);
+  if (!(await sessionHasMfa())) return NextResponse.redirect(new URL("/app/mfa", request.url), 303);
   const { id } = await context.params;
   const form = await request.formData();
   const file = form.get("file");
   if (!(file instanceof File) || file.size === 0) {
-    return NextResponse.redirect(notice(request, id, "Choose a file to upload."));
+    return NextResponse.redirect(notice(request, id, "Choose a file to upload."), 303);
   }
   const bytes = new Uint8Array(await file.arrayBuffer());
   const claimed = String(form.get("claimedSha256") ?? "").trim();
@@ -34,9 +34,10 @@ export async function POST(
       process.env,
     );
     const target = new URL(`/app/matters/${id}/evidence/${result.id}`, request.url);
-    return NextResponse.redirect(target);
+    return NextResponse.redirect(target, 303);
   } catch (error) {
-    if (error instanceof AppError) return NextResponse.redirect(notice(request, id, error.message));
+    if (error instanceof AppError)
+      return NextResponse.redirect(notice(request, id, error.message), 303);
     throw error;
   }
 }
