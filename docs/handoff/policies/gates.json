@@ -1,0 +1,480 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "implementation_specification",
+  "policyVersion": "us-software-utility-2026-09-design-1",
+  "jurisdiction": "US",
+  "initialDomain": "software_and_computer_implemented_utility_inventions",
+  "notice": "This catalog is a design contract. It is not a validated legal rules engine. Runtime evaluators must be implemented, tested and reviewed.",
+  "outcomes": [
+    "pending",
+    "running",
+    "pass",
+    "needs_information",
+    "needs_review",
+    "fail",
+    "not_applicable",
+    "stale"
+  ],
+  "evaluationBinding": {
+    "immutable": true,
+    "required": [
+      "tenantId",
+      "matterId",
+      "snapshotId",
+      "dependencyDigest",
+      "policyVersion",
+      "evaluatedAt"
+    ],
+    "carryForward": "deterministic_equal_dependency_digest_with_new_snapshot_binding",
+    "carryForwardHumanRelease": false
+  },
+  "dispositions": {
+    "integrity": [
+      "fixed",
+      "resolved_with_evidence"
+    ],
+    "reviewable": [
+      "fixed",
+      "resolved_with_evidence",
+      "risk_accepted"
+    ],
+    "advisory": [
+      "fixed",
+      "resolved_with_evidence",
+      "risk_accepted",
+      "not_applicable"
+    ],
+    "rule": "An actual integrity defect cannot be waived. A false positive can be resolved only with evidence and authorized review."
+  },
+  "stageExecution": "Prerequisites order final gate evaluations; they do not prevent exploratory drafting, candidate analysis or remediation.",
+  "temporalDependencies": "G14 consumes an already released package. G15 consumes an already filed baseline and produces readiness for a new response snapshot. Neither creates a same-snapshot dependency on the new G13.",
+  "gates": [
+    {
+      "id": "G00",
+      "label": "Mandate and processing",
+      "sameSnapshotGateDependencies": [],
+      "dependencyInputs": [
+        "mandate",
+        "processing_policy",
+        "budget_account"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g00-mandate-and-data-processing",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G01",
+      "label": "Artifact integrity",
+      "sameSnapshotGateDependencies": [
+        "G00"
+      ],
+      "dependencyInputs": [
+        "artifact_versions",
+        "extraction_manifest"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g01-artifact-integrity-and-extraction",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G02",
+      "label": "Mechanism sufficiency",
+      "sameSnapshotGateDependencies": [
+        "G01"
+      ],
+      "dependencyInputs": [
+        "assertions",
+        "mechanisms",
+        "open_questions"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g02-mechanism-sufficiency",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G03",
+      "label": "Inventorship ownership and chronology",
+      "sameSnapshotGateDependencies": [
+        "G02"
+      ],
+      "dependencyInputs": [
+        "contributions",
+        "rights_records",
+        "chronology",
+        "selected_features"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g03-inventorship-ownership-and-chronology",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G04",
+      "label": "Research scope and current authority",
+      "sameSnapshotGateDependencies": [
+        "G00",
+        "G02"
+      ],
+      "dependencyInputs": [
+        "search_plan",
+        "adapter_health",
+        "rule_pack"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g04-research-scope-and-current-authority",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G05",
+      "label": "Prior art novelty and obviousness",
+      "sameSnapshotGateDependencies": [
+        "G04"
+      ],
+      "dependencyInputs": [
+        "claim_versions",
+        "search_manifest",
+        "reference_versions",
+        "art_mappings",
+        "date_assessments"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g05-prior-art-novelty-and-obviousness",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G06",
+      "label": "Subject matter eligibility",
+      "sameSnapshotGateDependencies": [
+        "G04"
+      ],
+      "dependencyInputs": [
+        "claim_versions",
+        "mechanisms",
+        "disclosure_support",
+        "rule_pack"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g06-subject-matter-eligibility",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G07",
+      "label": "Embodiments and design around",
+      "sameSnapshotGateDependencies": [
+        "G02"
+      ],
+      "dependencyInputs": [
+        "claim_versions",
+        "embodiments",
+        "design_around_scenarios",
+        "development_records"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g07-embodiments-and-design-around-analysis",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G08",
+      "label": "Claim architecture",
+      "sameSnapshotGateDependencies": [
+        "G05",
+        "G06",
+        "G07"
+      ],
+      "dependencyInputs": [
+        "claim_versions",
+        "claim_logic",
+        "support_links",
+        "actor_maps"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g08-claim-architecture",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G09",
+      "label": "Disclosure and figures",
+      "sameSnapshotGateDependencies": [
+        "G03",
+        "G08"
+      ],
+      "dependencyInputs": [
+        "document_tree",
+        "figures",
+        "support_links",
+        "priority_records",
+        "experiment_records"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g09-disclosure-and-figures",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G10",
+      "label": "Independent challenge",
+      "sameSnapshotGateDependencies": [
+        "G05",
+        "G06",
+        "G08",
+        "G09"
+      ],
+      "dependencyInputs": [
+        "candidate_application",
+        "findings",
+        "source_verification",
+        "design_around_scenarios"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g10-independent-challenge-and-reconciliation",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G11",
+      "label": "Commercial assessment",
+      "sameSnapshotGateDependencies": [
+        "G02",
+        "G05",
+        "G07"
+      ],
+      "dependencyInputs": [
+        "commercial_brief",
+        "market_evidence",
+        "cost_assumptions",
+        "goal"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g11-commercial-assessment",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G12",
+      "label": "Reproducible export",
+      "sameSnapshotGateDependencies": [
+        "G09",
+        "G10"
+      ],
+      "dependencyInputs": [
+        "document_tree",
+        "render_report",
+        "content_comparison",
+        "package_manifest",
+        "format_rule_pack"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g12-reproducible-export",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G13",
+      "label": "Human release",
+      "sameSnapshotGateDependencies": [
+        "G00",
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12"
+      ],
+      "dependencyInputs": [
+        "gate_evaluations",
+        "human_decisions",
+        "manifest_digest",
+        "identity_capacity",
+        "engagement"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g13-human-release",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": true
+    },
+    {
+      "id": "G14",
+      "label": "Filing receipt reconciliation",
+      "sameSnapshotGateDependencies": [],
+      "dependencyInputs": [
+        "historical_release",
+        "official_receipt",
+        "actual_submission_artifacts"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g14-filing-receipt-reconciliation",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": false
+    },
+    {
+      "id": "G15",
+      "label": "Prosecution readiness",
+      "sameSnapshotGateDependencies": [],
+      "dependencyInputs": [
+        "filed_baseline",
+        "official_action",
+        "response_draft",
+        "amendment_support",
+        "confirmed_docket",
+        "changed_content_evaluations"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g15-prosecution-cycle",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": false
+    },
+    {
+      "id": "G16",
+      "label": "Portfolio watch",
+      "sameSnapshotGateDependencies": [],
+      "dependencyInputs": [
+        "approved_watch_plan",
+        "source_deltas",
+        "private_alerts",
+        "watch_budget"
+      ],
+      "acceptanceSpecification": "PIPELINE_GATES.md#g16-portfolio-watch",
+      "modelCanFinalize": false,
+      "requiredForInitialFinalRelease": false
+    }
+  ],
+  "releaseProfiles": {
+    "working": {
+      "requiredPassedGates": [
+        "G00"
+      ],
+      "requirements": [
+        "authorized_export",
+        "artifact_security_checks",
+        "accurate_incomplete_status"
+      ],
+      "professionalReview": false,
+      "canLabelFinal": false
+    },
+    "us_individual_self_filer": {
+      "requiredPassedGates": [
+        "G00",
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13"
+      ],
+      "humanCapacity": [
+        "individual_applicant",
+        "patent_agent",
+        "patent_attorney"
+      ],
+      "requirements": [
+        "individual_applicant_scope_verified",
+        "snapshot_bound_release"
+      ],
+      "canLabelFinal": true,
+      "canClaimPractitionerReview": "only_with_verified_practitioner_approval"
+    },
+    "us_practitioner_supervised": {
+      "requiredPassedGates": [
+        "G00",
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13"
+      ],
+      "humanCapacity": [
+        "patent_agent",
+        "patent_attorney"
+      ],
+      "requirements": [
+        "registration_and_scope_verified",
+        "engagement_record",
+        "snapshot_bound_release"
+      ],
+      "canLabelFinal": true
+    },
+    "us_entity_applicant": {
+      "extends": "us_practitioner_supervised",
+      "requirements": [
+        "entity_applicant",
+        "authorized_entity_representative",
+        "verified_registered_practitioner"
+      ],
+      "canLabelFinal": true
+    },
+    "us_prosecution_response": {
+      "requiredPassedGates": [
+        "G00",
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G15",
+        "G13"
+      ],
+      "conditionalRule": "Reevaluate changed inputs and material issues. Unchanged required evaluations may be carried forward only with identical dependency digests and a new binding to the response snapshot; release approval is always new.",
+      "requirements": [
+        "confirmed_filed_baseline",
+        "correct_official_action",
+        "confirmed_docket",
+        "new_snapshot_bound_release",
+        "mode_capacity_inherited"
+      ],
+      "additionalPrerequisitesForG13": [
+        "G15"
+      ],
+      "canLabelFinal": true
+    },
+    "unsupported_domain_or_jurisdiction": {
+      "extends": "working",
+      "requirements": [
+        "unsupported_scope_disclosed"
+      ],
+      "canLabelFinal": false
+    }
+  },
+  "nonWaivableIntegrityCodes": [
+    "UNAUTHORIZED_EGRESS",
+    "SOURCE_HASH_MISMATCH",
+    "MALWARE",
+    "FABRICATED_REFERENCE",
+    "FABRICATED_QUOTE",
+    "FABRICATED_RESULT",
+    "CROSS_MATTER_REFERENCE",
+    "STALE_RELEASE",
+    "UNVERIFIED_REQUIRED_IDENTITY",
+    "ENTITY_REPRESENTATION_MISSING",
+    "EXPORT_TEXT_LOSS",
+    "FALSE_FILED_STATUS"
+  ],
+  "defaultLimits": {
+    "maxRepairIterationsPerStage": 2,
+    "maxConcurrentCostlyStagesPerMatter": 2,
+    "starterRunBudgetMicrousd": "25000000",
+    "budgetMeaning": "A configurable initial spend authorization, not a predicted run price.",
+    "externalUnknownOutcomePolicy": "hold_reservation_and_reconcile",
+    "unapprovedRecurringRuns": false
+  },
+  "notApplicablePolicy": "No required final-release gate may be skipped by model choice. This initial US software-utility policy requires a pass for its required gates. Other applicability rules require a reviewed versioned policy change."
+}

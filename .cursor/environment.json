@@ -1,0 +1,10 @@
+{
+  "name": "patent-enrichment-platform",
+  "install": "bash .cursor/install.sh",
+  "terminals": [
+    {
+      "name": "web",
+      "command": "pnpm --filter @patent/web dev"
+    }
+  ]
+}
