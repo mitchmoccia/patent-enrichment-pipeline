@@ -24,6 +24,7 @@
     "@patent/billing": "workspace:*",
     "@patent/contracts": "workspace:*",
     "@patent/db": "workspace:*",
+    "@patent/domain": "workspace:*",
     "@patent/documents": "workspace:*",
     "@patent/security": "workspace:*",
     "@patent/workflows": "workspace:*",

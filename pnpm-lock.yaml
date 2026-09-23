@@ -113,6 +113,9 @@ importers:
       '@patent/documents':
         specifier: workspace:*
         version: link:../documents
+      '@patent/domain':
+        specifier: workspace:*
+        version: link:../domain
       '@patent/security':
         specifier: workspace:*
         version: link:../security
@@ -201,6 +204,15 @@ importers:
       '@types/node':
         specifier: ^22
         version: 22.20.2
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.7(@types/node@22.20.2)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.23.13)
+
+  packages/domain:
+    devDependencies:
       typescript:
         specifier: 7.0.2
         version: 7.0.2

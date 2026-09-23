@@ -221,7 +221,12 @@ BEGIN
     'invention_answers',
     'development_tasks',
     'mechanism_suggestions',
-    'invention_analyses'
+    'invention_analyses',
+    'contributions',
+    'chronology_events',
+    'embodiments',
+    'matter_rules',
+    'release_choices'
   ]
   LOOP
     EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', table_name);
