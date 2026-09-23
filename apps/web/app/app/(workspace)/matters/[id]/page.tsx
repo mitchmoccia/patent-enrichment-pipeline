@@ -1,4 +1,4 @@
-import { getMatter } from "@patent/application";
+import { getMatter, listArtifacts } from "@patent/application";
 import { GATE_CATALOG } from "@patent/contracts";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,6 +24,7 @@ export default async function MatterPage({
   if (!data) notFound();
 
   const { matter, assertions, members } = data;
+  const artifacts = await listArtifacts(db(), ctx, id);
   const policy = matter.processingPolicy as { trainingUseAllowed?: boolean } | null;
 
   return (
@@ -81,21 +82,48 @@ export default async function MatterPage({
         </ul>
       </section>
 
-      <section className="rounded-lg border border-amber-200 bg-amber-50 p-5">
-        <h2 className="text-sm font-medium text-amber-900">What's next</h2>
-        <p className="mt-1 text-sm text-amber-900">
-          This matter is at <strong>intake</strong>. The pipeline that acts on your idea is being
-          built slice by slice. The next capabilities are not yet available:
+      <section className="rounded-lg border border-graphite-200 bg-paper-raised p-5">
+        <h2 className="text-sm font-medium text-graphite-700">Upload evidence</h2>
+        <p className="mt-1 text-sm text-graphite-500">
+          Original bytes are stored only after the hash and quarantine checks pass. S3 is used when
+          it is configured. Otherwise a local directory is labeled as local, or the upload is
+          refused.
         </p>
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-amber-900">
-          <li>
-            <strong>Upload supporting artifacts</strong> and inspect extracted evidence (slice S02 —
-            needs private object storage).
-          </li>
-          <li>
-            <strong>Run an intake analysis</strong> that models the mechanism and asks you targeted
-            questions (slice S04 — needs an approved model route).
-          </li>
+        <form
+          action={`/api/matters/${matter.id}/artifacts`}
+          method="post"
+          encType="multipart/form-data"
+          className="mt-3 flex flex-wrap items-center gap-3"
+        >
+          <label htmlFor="file" className="sr-only">
+            File
+          </label>
+          <input id="file" name="file" type="file" required className="text-sm text-graphite-700" />
+          <button
+            type="submit"
+            className="rounded-md bg-teal-accent px-3 py-1.5 text-sm font-medium text-white hover:opacity-90"
+          >
+            Upload
+          </button>
+        </form>
+        <ul className="mt-4 space-y-2">
+          {artifacts.length === 0 ? (
+            <li className="text-sm text-graphite-500">No artifacts yet.</li>
+          ) : (
+            artifacts.map((artifact) => (
+              <li key={artifact.id}>
+                <Link
+                  href={`/app/matters/${matter.id}/evidence/${artifact.id}`}
+                  className="text-sm text-teal-accent hover:underline"
+                >
+                  {artifact.originalName}
+                </Link>
+                <span className="ml-2 text-xs text-graphite-500">
+                  {artifact.scanStatus} · {artifact.storageDriver}
+                </span>
+              </li>
+            ))
+          )}
         </ul>
       </section>
 

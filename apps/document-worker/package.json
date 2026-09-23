@@ -1,0 +1,21 @@
+{
+  "name": "@patent/document-worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@patent/documents": "workspace:*",
+    "@patent/security": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsx": "^4.19.2",
+    "typescript": "7.0.2",
+    "vitest": "^3.2.4"
+  }
+}

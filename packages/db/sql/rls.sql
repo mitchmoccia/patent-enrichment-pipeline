@@ -33,6 +33,8 @@ ALTER TABLE public.matters ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.matter_acl ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.matter_snapshots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.assertions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.artifacts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.source_spans ENABLE ROW LEVEL SECURITY;
 
 -- ---------------------------------------------------------------------------
 -- matters
@@ -102,6 +104,20 @@ CREATE POLICY matter_snapshots_all ON public.matter_snapshots USING (
 
 DROP POLICY IF EXISTS assertions_all ON public.assertions;
 CREATE POLICY assertions_all ON public.assertions USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS artifacts_all ON public.artifacts;
+CREATE POLICY artifacts_all ON public.artifacts USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS source_spans_all ON public.source_spans;
+CREATE POLICY source_spans_all ON public.source_spans USING (
   tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
 ) WITH CHECK (
   tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)

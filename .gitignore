@@ -20,3 +20,6 @@ coverage/
 # misc
 .DS_Store
 *.log
+
+# local object store (development driver; not S3)
+.data/

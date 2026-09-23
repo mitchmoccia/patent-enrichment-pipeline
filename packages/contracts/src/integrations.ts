@@ -64,8 +64,23 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     label: "Private artifact storage (S3 + KMS)",
     category: "storage",
     slice: "S02",
-    requiredEnv: ["S3_BUCKET", "S3_REGION", "KMS_KEY_ID"],
-    description: "Immutable object versions with restricted, encrypted, signed access.",
+    requiredEnv: [
+      "S3_BUCKET",
+      "S3_REGION",
+      "KMS_KEY_ID",
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY",
+    ],
+    description:
+      "Immutable object versions with restricted, encrypted, signed access. A local directory does not satisfy this.",
+  },
+  {
+    id: "local_object_store",
+    label: "Local development object store",
+    category: "storage",
+    slice: "S02",
+    requiredEnv: ["OBJECT_STORE_LOCAL_DIR"],
+    description: "Explicit filesystem driver for development. Never reported as S3.",
   },
   {
     id: "workers",
