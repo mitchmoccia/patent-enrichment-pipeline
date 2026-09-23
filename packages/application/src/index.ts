@@ -21,4 +21,5 @@ export * from "./rights";
 export * from "./run-budget";
 export * from "./run-stages";
 export * from "./runs";
+export * from "./security-release";
 export * from "./specification";

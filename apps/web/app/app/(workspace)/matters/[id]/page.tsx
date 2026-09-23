@@ -116,6 +116,12 @@ export default async function MatterPage({
           >
             Operations
           </Link>
+          <Link
+            href={`/app/matters/${matter.id}/security`}
+            className="text-sm text-teal-accent hover:underline"
+          >
+            Security
+          </Link>
         </p>
       </div>
 

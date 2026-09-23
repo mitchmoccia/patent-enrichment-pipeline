@@ -237,6 +237,7 @@ BEGIN
     'response_drafts',
     'ids_candidates',
     'watch_plans',
+    'security_observations',
     'gate_evaluations',
     'gate_releases',
     'commercial_assessments',

@@ -13,4 +13,5 @@ export * from "./operations";
 export * from "./research";
 export * from "./rights";
 export * from "./runs";
+export * from "./security";
 export * from "./specification";
