@@ -124,6 +124,90 @@ CREATE POLICY source_spans_all ON public.source_spans USING (
 );
 
 -- ---------------------------------------------------------------------------
+-- runs, stages, attempts, budget, events (access follows matter ACL)
+-- ---------------------------------------------------------------------------
+ALTER TABLE public.runs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.stages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.step_attempts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.idempotency_commands ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.reservations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.external_operations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.outbox ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.matter_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.callback_receipts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.run_decisions ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS runs_all ON public.runs;
+CREATE POLICY runs_all ON public.runs USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS stages_all ON public.stages;
+CREATE POLICY stages_all ON public.stages USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS step_attempts_all ON public.step_attempts;
+CREATE POLICY step_attempts_all ON public.step_attempts USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS idempotency_commands_all ON public.idempotency_commands;
+CREATE POLICY idempotency_commands_all ON public.idempotency_commands USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS reservations_all ON public.reservations;
+CREATE POLICY reservations_all ON public.reservations USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS external_operations_all ON public.external_operations;
+CREATE POLICY external_operations_all ON public.external_operations USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS outbox_all ON public.outbox;
+CREATE POLICY outbox_all ON public.outbox USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS matter_events_all ON public.matter_events;
+CREATE POLICY matter_events_all ON public.matter_events USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS callback_receipts_all ON public.callback_receipts;
+CREATE POLICY callback_receipts_all ON public.callback_receipts USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS run_decisions_all ON public.run_decisions;
+CREATE POLICY run_decisions_all ON public.run_decisions USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+-- ---------------------------------------------------------------------------
 -- Application-role grants (non-owner; RLS-enforced). Auth tables have no RLS
 -- and are managed by Better Auth via this same role.
 -- ---------------------------------------------------------------------------

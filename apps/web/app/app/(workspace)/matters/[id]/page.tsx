@@ -1,10 +1,11 @@
-import { getMatter, listArtifacts } from "@patent/application";
+import { getMatter, listArtifacts, listMatterEvents, listMatterRuns } from "@patent/application";
 import { GATE_CATALOG } from "@patent/contracts";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/db";
 import { requireContext } from "@/session";
 import { GoalEditor, MembersPanel, PolicyPanel } from "./controls";
+import { RunPanel } from "./run-panel";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +26,8 @@ export default async function MatterPage({
 
   const { matter, assertions, members } = data;
   const artifacts = await listArtifacts(db(), ctx, id);
+  const runs = await listMatterRuns(db(), ctx, id);
+  const events = await listMatterEvents(db(), ctx, id, 0);
   const policy = matter.processingPolicy as { trainingUseAllowed?: boolean } | null;
 
   return (
@@ -55,6 +58,7 @@ export default async function MatterPage({
         budget={matter.runBudgetMicrousd}
         trainingUseAllowed={policy?.trainingUseAllowed ?? null}
       />
+      <RunPanel matterId={matter.id} runs={runs} events={events} />
       <MembersPanel
         matterId={matter.id}
         members={members.map((member) => ({

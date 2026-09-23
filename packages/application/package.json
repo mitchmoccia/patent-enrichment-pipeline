@@ -20,10 +20,12 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@patent/billing": "workspace:*",
     "@patent/contracts": "workspace:*",
     "@patent/db": "workspace:*",
     "@patent/documents": "workspace:*",
     "@patent/security": "workspace:*",
+    "@patent/workflows": "workspace:*",
     "drizzle-orm": "0.45.2",
     "zod": "4.6.1"
   },

@@ -62,7 +62,7 @@ export const matters = pgTable(
     headRevision: integer("head_revision").notNull().default(0),
     /** Human-approved processing policy. trainingUseAllowed must stay false. */
     processingPolicy: jsonb("processing_policy").$type<Record<string, unknown> | null>(),
-    /** Approved run cap in micro-USD. Accounting lands in S03; the record holds the cap now. */
+    /** Approved run cap in micro-USD. Reservations in S03 count against this cap. */
     runBudgetMicrousd: text("run_budget_microusd"),
     createdBy: text("created_by").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
