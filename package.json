@@ -1,0 +1,28 @@
+{
+  "name": "patent-enrichment-platform",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Evidence-centered patent development platform (US software utility inventions). Build specification in docs/handoff/.",
+  "packageManager": "pnpm@10.33.3",
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter @patent/contracts build && pnpm --filter @patent/db build && pnpm --filter @patent/web build",
+    "dev": "pnpm --filter @patent/web dev",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "check:env": "pnpm --filter @patent/web check:env"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.13",
+    "typescript": "7.0.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

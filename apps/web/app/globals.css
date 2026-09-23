@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/*
+ * Neutral paper/graphite foundation with a restrained deep-teal accent, per the
+ * product experience guidance in PATENT_ENRICHMENT_ARCHITECTURE.md §6.4.
+ * No lime, gradients, or decorative dashboards.
+ */
+@theme {
+  --color-paper: #f7f6f3;
+  --color-paper-raised: #fffefb;
+  --color-graphite-50: #f4f5f6;
+  --color-graphite-200: #d9dcdf;
+  --color-graphite-500: #6b7280;
+  --color-graphite-700: #374151;
+  --color-graphite-900: #1a1d21;
+  --color-teal-accent: #0f766e;
+  --color-teal-accent-soft: #cce3e0;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-graphite-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}

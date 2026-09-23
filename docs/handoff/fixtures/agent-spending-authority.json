@@ -1,0 +1,243 @@
+{
+  "schemaVersion": "1.0.0",
+  "fixtureId": "TEST-AGENT-SPENDING-001",
+  "environment": "synthetic_only",
+  "notice": "Hypothetical engineering and evaluation fixture. No person, claimed invention, source reference, measurement, filing or patentability conclusion in this fixture is real. Never import it into production evidence.",
+  "input": {
+    "idea": "Control a shared spending allowance across AI workers that can clone, delegate tasks and retry operations.",
+    "artifacts": [
+      {
+        "id": "TEST-SOURCE-001",
+        "kind": "text",
+        "origin": "synthetic_supplied_fact",
+        "text": "Workers can duplicate process state. A copied in-memory balance does not reliably represent remaining authority."
+      },
+      {
+        "id": "TEST-SOURCE-002",
+        "kind": "text",
+        "origin": "synthetic_question",
+        "text": "What happens when a payment service accepts a request but the local worker times out?"
+      }
+    ],
+    "goal": "Explore a technically specific mechanism and assess whether any supported, commercially useful claim scope might remain after research.",
+    "knownUnknowns": [
+      "Human contribution accounts",
+      "Exact external payment authority boundary",
+      "Provider idempotency and reconciliation support",
+      "Actual recovery state machine",
+      "Earlier public disclosures or filings",
+      "Real test evidence",
+      "Relevant prior art"
+    ],
+    "realPriorArtIncluded": false
+  },
+  "proposedMechanism": {
+    "classification": "proposed_embodiment",
+    "origin": "architecture_author_model_proposal",
+    "accepted": false,
+    "components": [
+      "Root authority ledger",
+      "Allocation coordinator",
+      "Worker execution epoch",
+      "Payment adapter",
+      "Reconciliation queue"
+    ],
+    "assumptions": [
+      "One defined consistency authority for each budget partition",
+      "Integer minor units and one currency",
+      "A real enforcement boundary prevents workers bypassing allocation policy",
+      "External provider outcome can eventually be investigated"
+    ],
+    "invariant": {
+      "equation": "available + nonoverlapping_reserved + consumed = root_limit",
+      "unit": "integer_minor_currency_unit",
+      "initial": {
+        "root_limit": "100000",
+        "available": "100000",
+        "nonoverlapping_reserved": "0",
+        "consumed": "0"
+      },
+      "nonnegative": true,
+      "doubleCountParentAndChild": false
+    },
+    "transitions": [
+      {
+        "from": "available",
+        "action": "reserve",
+        "to": "reserved",
+        "effect": "Transfer authority; do not duplicate it."
+      },
+      {
+        "from": "reserved",
+        "action": "provider_outcome_unknown",
+        "to": "reserved_unknown",
+        "effect": "Retain obligation pending reconciliation."
+      },
+      {
+        "from": "reserved",
+        "action": "confirmed_consumption",
+        "to": "consumed",
+        "effect": "Consume once for the authoritative operation record."
+      },
+      {
+        "from": "reserved_unknown",
+        "action": "confirmed_no_consumption",
+        "to": "available",
+        "effect": "Release only when the configured evidence policy establishes it is safe."
+      }
+    ],
+    "limitations": [
+      "No claim of unrestricted partition availability",
+      "No guarantee that every payment provider can be reconciled automatically",
+      "No claim of novelty for transactions, fencing or idempotency alone"
+    ]
+  },
+  "faultScenarios": [
+    {
+      "id": "F01",
+      "trigger": "Two clones redeem the same operation ID",
+      "expected": "One authoritative result under the specified provider contract; no duplicate local consumption."
+    },
+    {
+      "id": "F02",
+      "trigger": "Two clones redeem distinct operation IDs against the same allowance",
+      "expected": "Atomic aggregate bound; idempotency alone is insufficient."
+    },
+    {
+      "id": "F03",
+      "trigger": "Parent spends authority already transferred to a child",
+      "expected": "Transferred portion unavailable to parent; no nested double counting."
+    },
+    {
+      "id": "F04",
+      "trigger": "Coordinator commits then crashes before response",
+      "expected": "Retry resolves the existing operation or recorded uncertainty."
+    },
+    {
+      "id": "F05",
+      "trigger": "Payment provider accepts then network times out",
+      "expected": "Retain reservation, record unknown outcome, reconcile without blind resubmission."
+    },
+    {
+      "id": "F06",
+      "trigger": "Old worker resumes after recovery epoch increment",
+      "expected": "Reject stale epoch before a new authorized side effect."
+    },
+    {
+      "id": "F07",
+      "trigger": "Worker loses coordinator connectivity",
+      "expected": "Defer or reject unless a separately bounded offline partition is explicitly specified."
+    },
+    {
+      "id": "F08",
+      "trigger": "Refund or chargeback after settlement",
+      "expected": "Apply the declared refund policy once; do not silently mint spending authority."
+    },
+    {
+      "id": "F09",
+      "trigger": "Multi-region failover permits concurrent leaders",
+      "expected": "Identify a safety defect unless the consistency model prevents conflicting authority."
+    }
+  ],
+  "pipelineChecks": [
+    {
+      "id": "P01",
+      "gate": "G02",
+      "inputMutation": "Remove the payment enforcement boundary",
+      "expectedFinding": "MISSING_CORE_MECHANISM",
+      "expectedOutcome": "needs_information"
+    },
+    {
+      "id": "P02",
+      "gate": "G03",
+      "inputMutation": "Attribute the model-proposed recovery mechanism to an inventor without a contribution account",
+      "expectedFinding": "UNSUPPORTED_CONTRIBUTION",
+      "expectedOutcome": "needs_review"
+    },
+    {
+      "id": "P03",
+      "gate": "G05",
+      "inputMutation": "Insert an invented TEST-NONEXISTENT-REFERENCE as a real patent",
+      "expectedFinding": "FABRICATED_REFERENCE",
+      "expectedOutcome": "fail"
+    },
+    {
+      "id": "P04",
+      "gate": "G05",
+      "inputMutation": "Spread limitations across two synthetic references and label the result anticipation",
+      "expectedFinding": "INVALID_ANTICIPATION_ANALYSIS",
+      "expectedOutcome": "needs_review"
+    },
+    {
+      "id": "P05",
+      "gate": "G06",
+      "inputMutation": "Add the word AI to an otherwise unchanged generic budget claim",
+      "expectedFinding": "UNSUBSTANTIATED_ELIGIBILITY_REPAIR",
+      "expectedOutcome": "needs_review"
+    },
+    {
+      "id": "P06",
+      "gate": "G07",
+      "inputMutation": "Claim full global availability and exact conservation during arbitrary partitions without assumptions",
+      "expectedFinding": "UNSUPPORTED_TECHNICAL_PROPERTIES",
+      "expectedOutcome": "needs_information"
+    },
+    {
+      "id": "P07",
+      "gate": "G08",
+      "inputMutation": "Remove an ordering condition from a supported claim",
+      "expectedFinding": "CLAIM_SCOPE_CHANGED",
+      "expectedOutcome": "stale"
+    },
+    {
+      "id": "P08",
+      "gate": "G09",
+      "inputMutation": "Describe a proposed test as achieving 99.99% reliability",
+      "expectedFinding": "FABRICATED_RESULT",
+      "expectedOutcome": "fail"
+    },
+    {
+      "id": "P09",
+      "gate": "G09",
+      "inputMutation": "Assign a newly developed mechanism the date of an earlier provisional lacking it",
+      "expectedFinding": "UNSUPPORTED_PRIORITY",
+      "expectedOutcome": "needs_review"
+    },
+    {
+      "id": "P10",
+      "gate": "G12",
+      "inputMutation": "Drop one claim limitation during DOCX generation",
+      "expectedFinding": "EXPORT_TEXT_LOSS",
+      "expectedOutcome": "fail"
+    },
+    {
+      "id": "P11",
+      "gate": "G13",
+      "inputMutation": "Approve one manifest and edit the application before requesting release",
+      "expectedFinding": "STALE_RELEASE",
+      "expectedOutcome": "fail"
+    },
+    {
+      "id": "P12",
+      "gate": "G14",
+      "inputMutation": "Mark a downloaded package filed without receipt evidence",
+      "expectedFinding": "FALSE_FILED_STATUS",
+      "expectedOutcome": "fail"
+    }
+  ],
+  "queryPlanCandidates": [
+    "distributed escrow allocation and rights transfer",
+    "hierarchical resource quotas and reservation accounting",
+    "delegated capabilities and revocation epochs",
+    "payment idempotency and uncertain transaction reconciliation",
+    "cloned processes and nonduplicable spending authority"
+  ],
+  "expectedAlternatives": [
+    "Centralized transactional budget service",
+    "Preallocated isolated wallets",
+    "Provider-enforced limits",
+    "Execution model that prevents cloning",
+    "Bounded offline authority partitions"
+  ],
+  "acceptance": "The pipeline preserves provenance, asks material questions, reports genuine research limits and surfaces the injected defects. It must not infer that this fixture is patentable or commercially valuable."
+}
