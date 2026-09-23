@@ -235,7 +235,10 @@ BEGIN
     'claim_support',
     'claim_limitations',
     'prior_art_findings',
-    'eligibility_reviews'
+    'eligibility_reviews',
+    'specification_sections',
+    'specification_figures',
+    'terminology'
   ]
   LOOP
     EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', table_name);

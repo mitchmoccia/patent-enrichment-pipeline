@@ -29,3 +29,9 @@ export {
   ruleAlert,
   seededLegalSources,
 } from "./rules";
+export {
+  assertCleanSection,
+  assertNumericalClaim,
+  figureDisagreement,
+  hypotheticalStatus,
+} from "./specification";

@@ -8,3 +8,4 @@ export * from "./matters";
 export * from "./research";
 export * from "./rights";
 export * from "./runs";
+export * from "./specification";
