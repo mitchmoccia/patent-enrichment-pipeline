@@ -4,18 +4,27 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/db";
 import { requireContext } from "@/session";
+import { GoalEditor, MembersPanel, PolicyPanel } from "./controls";
 
 export const dynamic = "force-dynamic";
 
-export default async function MatterPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function MatterPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ notice?: string }>;
+}) {
   const { id } = await params;
+  const { notice } = await searchParams;
   const ctx = await requireContext();
   const data = await getMatter(db(), ctx, id);
 
   // RLS + ACL: a matter the caller cannot access resolves to null -> 404.
   if (!data) notFound();
 
-  const { matter, assertions } = data;
+  const { matter, assertions, members } = data;
+  const policy = matter.processingPolicy as { trainingUseAllowed?: boolean } | null;
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
@@ -32,12 +41,26 @@ export default async function MatterPage({ params }: { params: Promise<{ id: str
         </p>
       </div>
 
-      {matter.goal ? (
-        <section className="rounded-lg border border-graphite-200 bg-paper-raised p-5">
-          <h2 className="text-sm font-medium text-graphite-700">Goal</h2>
-          <p className="mt-1 text-graphite-900">{matter.goal}</p>
-        </section>
+      {notice ? (
+        <p className="rounded-md border border-teal-accent-soft bg-teal-accent-soft px-3 py-2 text-sm text-teal-accent">
+          {notice}
+        </p>
       ) : null}
+
+      <GoalEditor matterId={matter.id} goal={matter.goal} revision={matter.headRevision} />
+      <PolicyPanel
+        matterId={matter.id}
+        revision={matter.headRevision}
+        budget={matter.runBudgetMicrousd}
+        trainingUseAllowed={policy?.trainingUseAllowed ?? null}
+      />
+      <MembersPanel
+        matterId={matter.id}
+        members={members.map((member) => ({
+          principalId: member.principalId,
+          role: member.role,
+        }))}
+      />
 
       <section className="rounded-lg border border-graphite-200 bg-paper-raised p-5">
         <h2 className="text-sm font-medium text-graphite-700">Evidence — assertions</h2>

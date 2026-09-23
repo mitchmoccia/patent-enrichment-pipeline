@@ -5,6 +5,11 @@ import type { TenantContext } from "@patent/db";
  * verified session and organization membership — never from client input.
  */
 export interface AuthorizedContext extends TenantContext {
-  /** Optional capability strings for finer-grained checks (unused in S01). */
+  /** Optional capability strings for finer-grained checks. */
   capabilities?: string[];
+  /**
+   * Who is acting. A model cannot change permissions, budgets, gates, or filings.
+   * Omitted means a person (the verified session).
+   */
+  actorKind?: "person" | "model";
 }

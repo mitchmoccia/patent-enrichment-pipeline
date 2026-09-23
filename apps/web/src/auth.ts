@@ -3,6 +3,7 @@ import { createDb, schema } from "@patent/db";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
+import { twoFactor } from "better-auth/plugins";
 
 const { db } = createDb(process.env.DATABASE_URL ?? "");
 
@@ -21,6 +22,7 @@ export const auth = betterAuth({
       session: schema.session,
       account: schema.account,
       verification: schema.verification,
+      twoFactor: schema.twoFactor,
     },
   }),
   emailAndPassword: {
@@ -28,5 +30,10 @@ export const auth = betterAuth({
     // Development pilot: email delivery is not configured yet.
     requireEmailVerification: false,
   },
-  plugins: [nextCookies()],
+  plugins: [
+    twoFactor({
+      issuer: "Patent Enrichment Platform",
+    }),
+    nextCookies(),
+  ],
 });

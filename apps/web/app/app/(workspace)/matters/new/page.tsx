@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireContext } from "@/session";
-import { createMatterAction } from "../../actions";
+import { createMatterAction } from "../../../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -66,6 +66,52 @@ export default async function NewMatterPage() {
             placeholder="What outcome are you pursuing?"
           />
         </div>
+
+        <div className="space-y-1">
+          <label
+            htmlFor="runBudgetMicrousd"
+            className="block text-sm font-medium text-graphite-700"
+          >
+            Run budget (micro-USD) <span className="text-graphite-400">(optional)</span>
+          </label>
+          <input
+            id="runBudgetMicrousd"
+            name="runBudgetMicrousd"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            className="w-full rounded-md border border-graphite-200 px-3 py-2 text-graphite-900 outline-none focus:border-teal-accent"
+            placeholder="25000000"
+          />
+          <p className="text-xs text-graphite-500">
+            Stored on the matter. Spend accounting starts when a run is launched.
+          </p>
+        </div>
+
+        <fieldset className="space-y-3 rounded-md border border-graphite-200 p-4">
+          <legend className="px-1 text-sm font-medium text-graphite-700">Processing policy</legend>
+          <label className="flex items-center gap-2 text-sm text-graphite-700">
+            <input type="checkbox" name="recordPolicy" value="yes" />
+            Record a policy with this matter
+          </label>
+          <div className="space-y-1">
+            <label htmlFor="allowedRegions" className="block text-sm text-graphite-700">
+              Allowed regions
+            </label>
+            <input
+              id="allowedRegions"
+              name="allowedRegions"
+              defaultValue="us"
+              className="w-full rounded-md border border-graphite-200 px-3 py-2 text-graphite-900 outline-none focus:border-teal-accent"
+            />
+          </div>
+          <label className="flex items-center gap-2 text-sm text-graphite-700">
+            <input type="checkbox" name="confidentialEgressAllowed" value="yes" />
+            Confidential egress allowed
+          </label>
+          <p className="text-xs text-graphite-500">
+            Training use stays off. You are the approving person; this is not a counsel sign-off.
+          </p>
+        </fieldset>
 
         <div className="space-y-1">
           <label htmlFor="applicantMode" className="block text-sm font-medium text-graphite-700">

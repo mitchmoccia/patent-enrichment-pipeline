@@ -7,7 +7,7 @@
  * JS property names match Better Auth field names; SQL column names are
  * snake_case. Better Auth reads/writes these via the Drizzle adapter.
  */
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -103,4 +103,8 @@ export const twoFactor = pgTable("two_factor", {
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
+  /** False until the authenticator code is verified. */
+  verified: boolean("verified").notNull().default(false),
+  failedVerificationCount: integer("failed_verification_count").notNull().default(0),
+  lockedUntil: timestamp("locked_until", { withTimezone: true }),
 });

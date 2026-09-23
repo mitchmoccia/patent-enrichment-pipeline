@@ -3,7 +3,13 @@ export type AppErrorCode =
   | "NOT_FOUND"
   | "VALIDATION_FAILED"
   | "POLICY_BLOCKED"
-  | "REVISION_CONFLICT";
+  | "REVISION_CONFLICT"
+  | "IDEMPOTENCY_CONFLICT"
+  | "BUDGET_EXCEEDED"
+  | "PROVIDER_UNAVAILABLE"
+  | "SOURCE_UNAVAILABLE"
+  | "GATE_BLOCKED"
+  | "EXTERNAL_OUTCOME_UNKNOWN";
 
 /** Application-layer error with a stable code the transport layer can map. */
 export class AppError extends Error {
