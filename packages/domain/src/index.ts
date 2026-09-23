@@ -44,6 +44,13 @@ export {
   type FindingInput,
 } from "./prior-art";
 export {
+  assertAmendmentSupported,
+  assertCanRecordFiled,
+  assertDeadlineContext,
+  extractOfficeClaims,
+  reconcileFiles,
+} from "./prosecution";
+export {
   assertCurrentRule,
   type LegalSource,
   RuleError,

@@ -125,6 +125,14 @@ async function factsOf(
     .select({ id: schema.commercialAssessments.id })
     .from(schema.commercialAssessments)
     .where(eq(schema.commercialAssessments.matterId, matterId));
+  const receipts = await tx
+    .select({ verified: schema.filingReceipts.verified })
+    .from(schema.filingReceipts)
+    .where(eq(schema.filingReceipts.matterId, matterId));
+  const actions = await tx
+    .select({ id: schema.officeActions.id })
+    .from(schema.officeActions)
+    .where(eq(schema.officeActions.matterId, matterId));
   return {
     trainingUseAllowed: policy ? policy.trainingUseAllowed === true : null,
     budgetSet: Boolean(matter.runBudgetMicrousd),
@@ -158,8 +166,8 @@ async function factsOf(
     sectionKinds: sections.map((section) => section.kind),
     commercialRecorded: commercial.length > 0,
     exportDigest: liveExport ? packageDigest : null,
-    receiptVerified: false,
-    officeAction: false,
+    receiptVerified: receipts.some((row) => row.verified),
+    officeAction: actions.length > 0,
     watchPlan: false,
   };
 }

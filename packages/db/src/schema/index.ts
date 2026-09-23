@@ -5,6 +5,7 @@ export * from "./auth";
 export * from "./claims";
 export * from "./commercial";
 export * from "./exports";
+export * from "./filing";
 export * from "./gates";
 export * from "./invention";
 export * from "./matters";

@@ -6,6 +6,7 @@ export * from "./commercial";
 export * from "./context";
 export * from "./errors";
 export * from "./export";
+export * from "./filing";
 export * from "./gates";
 export * from "./human";
 export * from "./invention";
