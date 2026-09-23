@@ -9,6 +9,7 @@ export * from "./filing";
 export * from "./gates";
 export * from "./invention";
 export * from "./matters";
+export * from "./operations";
 export * from "./research";
 export * from "./rights";
 export * from "./runs";

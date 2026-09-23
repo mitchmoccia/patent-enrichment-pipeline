@@ -236,6 +236,7 @@ BEGIN
     'docket_deadlines',
     'response_drafts',
     'ids_candidates',
+    'watch_plans',
     'gate_evaluations',
     'gate_releases',
     'commercial_assessments',

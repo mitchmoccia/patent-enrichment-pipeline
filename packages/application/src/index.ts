@@ -14,6 +14,7 @@ export * from "./matter-edits";
 export * from "./matter-transports";
 export * from "./matters";
 export * from "./mfa";
+export * from "./operations";
 export * from "./prior-art";
 export * from "./research";
 export * from "./rights";

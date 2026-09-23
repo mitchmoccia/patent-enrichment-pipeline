@@ -133,6 +133,10 @@ async function factsOf(
     .select({ id: schema.officeActions.id })
     .from(schema.officeActions)
     .where(eq(schema.officeActions.matterId, matterId));
+  const watches = await tx
+    .select({ id: schema.watchPlans.id })
+    .from(schema.watchPlans)
+    .where(eq(schema.watchPlans.matterId, matterId));
   return {
     trainingUseAllowed: policy ? policy.trainingUseAllowed === true : null,
     budgetSet: Boolean(matter.runBudgetMicrousd),
@@ -168,7 +172,7 @@ async function factsOf(
     exportDigest: liveExport ? packageDigest : null,
     receiptVerified: receipts.some((row) => row.verified),
     officeAction: actions.length > 0,
-    watchPlan: false,
+    watchPlan: watches.length > 0,
   };
 }
 

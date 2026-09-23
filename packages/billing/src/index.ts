@@ -9,3 +9,13 @@ export {
   type ReservationStatus,
   type ReservePlan,
 } from "./ledger";
+export {
+  approveWatch,
+  classifyWebhook,
+  incurredAfterCancel,
+  providerHealth,
+  quotedAmount,
+  redactAnalytics,
+  settleCancel,
+  stripeEntitlements,
+} from "./operations";
