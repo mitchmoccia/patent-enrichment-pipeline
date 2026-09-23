@@ -62,6 +62,12 @@ export default async function MatterPage({
           >
             Research
           </Link>
+          <Link
+            href={`/app/matters/${matter.id}/prior-art`}
+            className="text-sm text-teal-accent hover:underline"
+          >
+            Prior art
+          </Link>
         </p>
       </div>
 

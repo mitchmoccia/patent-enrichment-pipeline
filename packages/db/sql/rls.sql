@@ -228,7 +228,10 @@ BEGIN
     'matter_rules',
     'release_choices',
     'imported_references',
-    'research_queries'
+    'research_queries',
+    'claim_limitations',
+    'prior_art_findings',
+    'eligibility_reviews'
   ]
   LOOP
     EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', table_name);

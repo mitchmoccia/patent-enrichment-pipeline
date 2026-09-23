@@ -1,5 +1,12 @@
 export { assertFilingCoversEmbodiment, assertSelfFilerRelease } from "./filing";
 export {
+  assessEligibility,
+  assessFinding,
+  type CitedPassage,
+  type FindingDecision,
+  type FindingInput,
+} from "./prior-art";
+export {
   assertCurrentRule,
   type LegalSource,
   RuleError,
