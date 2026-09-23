@@ -238,6 +238,7 @@ BEGIN
     'ids_candidates',
     'watch_plans',
     'security_observations',
+    'benchmark_reports',
     'gate_evaluations',
     'gate_releases',
     'commercial_assessments',

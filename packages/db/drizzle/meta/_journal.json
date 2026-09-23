@@ -120,6 +120,13 @@
       "when": 1789071800000,
       "tag": "0016_security",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1789071900000,
+      "tag": "0017_benchmark",
+      "breakpoints": true
     }
   ]
 }
