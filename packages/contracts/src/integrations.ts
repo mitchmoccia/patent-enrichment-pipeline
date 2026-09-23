@@ -105,7 +105,8 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     category: "research_sources",
     slice: "S06",
     requiredEnv: ["USPTO_API_KEY"],
-    description: "Public patent discovery and record retrieval (exact coverage verified in S06).",
+    description:
+      "No request is sent until an entitled endpoint is verified. A missing or rejected key is not zero matches.",
   },
   {
     id: "epo_ops",
@@ -113,7 +114,8 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     category: "research_sources",
     slice: "S06",
     requiredEnv: ["EPO_OPS_KEY"],
-    description: "Registered EPO OPS API access under fair-use terms.",
+    description:
+      "No request is sent until an entitled OPS endpoint is verified. A missing or rejected key is not zero matches.",
   },
   {
     id: "billing",

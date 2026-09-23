@@ -226,7 +226,9 @@ BEGIN
     'chronology_events',
     'embodiments',
     'matter_rules',
-    'release_choices'
+    'release_choices',
+    'imported_references',
+    'research_queries'
   ]
   LOOP
     EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', table_name);

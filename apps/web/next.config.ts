@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
     "@patent/billing",
     "@patent/workflows",
     "@patent/domain",
+    "@patent/research",
   ],
   // Confidential matter data must never enter shared caches or public metadata.
   // Matter routes will use request-scoped reads once they exist (S01+).

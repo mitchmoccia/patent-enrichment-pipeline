@@ -26,6 +26,7 @@
     "@patent/db": "workspace:*",
     "@patent/domain": "workspace:*",
     "@patent/documents": "workspace:*",
+    "@patent/research": "workspace:*",
     "@patent/security": "workspace:*",
     "@patent/workflows": "workspace:*",
     "drizzle-orm": "0.45.2",
