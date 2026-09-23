@@ -48,8 +48,9 @@ export const envSchema = z.object({
   // Worker authorization (S02/S03)
   WORKER_CALLBACK_SECRET: optionalNonEmpty,
 
-  // Model routes (S04+)
+  // Model routes (S04+). A model id is required before a live call; none is assumed.
   AI_GATEWAY_API_KEY: optionalNonEmpty,
+  AI_INTAKE_MODEL: optionalNonEmpty,
 
   // Source/research providers (S06)
   USPTO_API_KEY: optionalNonEmpty,

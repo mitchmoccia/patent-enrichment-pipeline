@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
     "@patent/application",
     "@patent/documents",
     "@patent/security",
+    "@patent/ai",
     "@patent/billing",
     "@patent/workflows",
   ],

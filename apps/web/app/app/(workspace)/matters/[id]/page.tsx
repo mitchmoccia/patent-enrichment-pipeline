@@ -43,6 +43,12 @@ export default async function MatterPage({
           State: {matter.state} · Applicant mode: {matter.applicantMode} · Revision{" "}
           {matter.headRevision}
         </p>
+        <Link
+          href={`/app/matters/${matter.id}/invention`}
+          className="mt-2 inline-block text-sm text-teal-accent hover:underline"
+        >
+          Invention workspace
+        </Link>
       </div>
 
       {notice ? (

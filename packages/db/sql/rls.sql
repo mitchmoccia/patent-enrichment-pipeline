@@ -208,6 +208,33 @@ CREATE POLICY run_decisions_all ON public.run_decisions USING (
 );
 
 -- ---------------------------------------------------------------------------
+-- Invention workspace (S04)
+-- ---------------------------------------------------------------------------
+DO $$
+DECLARE
+  table_name text;
+BEGIN
+  FOREACH table_name IN ARRAY ARRAY[
+    'invention_extractions',
+    'invention_elements',
+    'invention_questions',
+    'invention_answers',
+    'development_tasks',
+    'mechanism_suggestions',
+    'invention_analyses'
+  ]
+  LOOP
+    EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', table_name);
+    EXECUTE format('DROP POLICY IF EXISTS %I ON public.%I', table_name || '_all', table_name);
+    EXECUTE format(
+      'CREATE POLICY %I ON public.%I USING (tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)) WITH CHECK (tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id))',
+      table_name || '_all',
+      table_name
+    );
+  END LOOP;
+END $$;
+
+-- ---------------------------------------------------------------------------
 -- Application-role grants (non-owner; RLS-enforced). Auth tables have no RLS
 -- and are managed by Better Auth via this same role.
 -- ---------------------------------------------------------------------------

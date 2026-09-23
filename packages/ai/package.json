@@ -1,5 +1,5 @@
 {
-  "name": "@patent/application",
+  "name": "@patent/ai",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,28 +11,15 @@
       "import": "./src/index.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
-    "@patent/ai": "workspace:*",
-    "@patent/billing": "workspace:*",
-    "@patent/contracts": "workspace:*",
-    "@patent/db": "workspace:*",
-    "@patent/documents": "workspace:*",
-    "@patent/security": "workspace:*",
-    "@patent/workflows": "workspace:*",
-    "drizzle-orm": "0.45.2",
+    "ai": "7.0.97",
     "zod": "4.6.1"
   },
   "devDependencies": {
-    "@types/node": "^22",
-    "dotenv": "17.4.2",
     "typescript": "7.0.2",
     "vitest": "^3.2.4"
   }

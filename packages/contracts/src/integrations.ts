@@ -95,8 +95,9 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     label: "AI model routes (AI Gateway / provider)",
     category: "model_routes",
     slice: "S04+",
-    requiredEnv: ["AI_GATEWAY_API_KEY"],
-    description: "Approved, bounded model routes behind an application adapter.",
+    requiredEnv: ["AI_GATEWAY_API_KEY", "AI_INTAKE_MODEL"],
+    description:
+      "Approved model route. Both the gateway key and an explicit model id are required.",
   },
   {
     id: "uspto",
