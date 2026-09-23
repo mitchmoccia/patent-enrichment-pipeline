@@ -18,3 +18,9 @@ export async function requireContext(): Promise<AuthorizedContext> {
   if (!ctx) redirect("/sign-in");
   return ctx;
 }
+
+/** True only after the person has verified a TOTP code. */
+export async function sessionHasMfa(): Promise<boolean> {
+  const session = await auth.api.getSession({ headers: await headers() });
+  return session?.user.twoFactorEnabled === true;
+}

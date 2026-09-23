@@ -16,7 +16,14 @@ next-env.d.ts
 
 # test / coverage
 coverage/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
 
 # misc
 .DS_Store
 *.log
+
+# local object store (development driver; not S3)
+.data/

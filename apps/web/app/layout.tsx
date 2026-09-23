@@ -38,8 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
         <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
         <footer className="mx-auto max-w-5xl px-6 py-10 text-xs text-graphite-500">
-          Development shell (slice S00). Not a legal service. No filing, search, or model
-          integration is active until explicitly configured and verified.
+          Private development workspace. Not a legal service. Unconfigured integrations stay
+          unavailable until a credential is present and verified.
         </footer>
       </body>
     </html>

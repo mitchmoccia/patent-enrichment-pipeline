@@ -36,16 +36,21 @@ export const envSchema = z.object({
   BETTER_AUTH_SECRET: optionalNonEmpty,
   BETTER_AUTH_URL: optionalUrl,
 
-  // Private artifact storage (S02)
+  // Private artifact storage (S02). Local dir is a dev driver, not S3.
   S3_BUCKET: optionalNonEmpty,
   S3_REGION: optionalNonEmpty,
   KMS_KEY_ID: optionalNonEmpty,
+  AWS_ACCESS_KEY_ID: optionalNonEmpty,
+  AWS_SECRET_ACCESS_KEY: optionalNonEmpty,
+  AWS_SESSION_TOKEN: optionalNonEmpty,
+  OBJECT_STORE_LOCAL_DIR: optionalNonEmpty,
 
   // Worker authorization (S02/S03)
   WORKER_CALLBACK_SECRET: optionalNonEmpty,
 
-  // Model routes (S04+)
+  // Model routes (S04+). A model id is required before a live call; none is assumed.
   AI_GATEWAY_API_KEY: optionalNonEmpty,
+  AI_INTAKE_MODEL: optionalNonEmpty,
 
   // Source/research providers (S06)
   USPTO_API_KEY: optionalNonEmpty,

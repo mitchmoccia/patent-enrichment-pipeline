@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "check:env": "node scripts/check-env.mjs"
+    "check:env": "node scripts/check-env.mjs",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@patent/application": "workspace:*",
@@ -23,6 +24,7 @@
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "^22",
     "@types/react": "^19",
+    "@playwright/test": "1.57.0",
     "@types/react-dom": "^19",
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2"

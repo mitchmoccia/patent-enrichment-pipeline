@@ -33,6 +33,8 @@ ALTER TABLE public.matters ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.matter_acl ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.matter_snapshots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.assertions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.artifacts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.source_spans ENABLE ROW LEVEL SECURITY;
 
 -- ---------------------------------------------------------------------------
 -- matters
@@ -106,6 +108,160 @@ CREATE POLICY assertions_all ON public.assertions USING (
 ) WITH CHECK (
   tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
 );
+
+DROP POLICY IF EXISTS artifacts_all ON public.artifacts;
+CREATE POLICY artifacts_all ON public.artifacts USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS source_spans_all ON public.source_spans;
+CREATE POLICY source_spans_all ON public.source_spans USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+-- ---------------------------------------------------------------------------
+-- runs, stages, attempts, budget, events (access follows matter ACL)
+-- ---------------------------------------------------------------------------
+ALTER TABLE public.runs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.stages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.step_attempts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.idempotency_commands ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.reservations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.external_operations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.outbox ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.matter_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.callback_receipts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.run_decisions ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS runs_all ON public.runs;
+CREATE POLICY runs_all ON public.runs USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS stages_all ON public.stages;
+CREATE POLICY stages_all ON public.stages USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS step_attempts_all ON public.step_attempts;
+CREATE POLICY step_attempts_all ON public.step_attempts USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS idempotency_commands_all ON public.idempotency_commands;
+CREATE POLICY idempotency_commands_all ON public.idempotency_commands USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS reservations_all ON public.reservations;
+CREATE POLICY reservations_all ON public.reservations USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS external_operations_all ON public.external_operations;
+CREATE POLICY external_operations_all ON public.external_operations USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS outbox_all ON public.outbox;
+CREATE POLICY outbox_all ON public.outbox USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS matter_events_all ON public.matter_events;
+CREATE POLICY matter_events_all ON public.matter_events USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS callback_receipts_all ON public.callback_receipts;
+CREATE POLICY callback_receipts_all ON public.callback_receipts USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+DROP POLICY IF EXISTS run_decisions_all ON public.run_decisions;
+CREATE POLICY run_decisions_all ON public.run_decisions USING (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+) WITH CHECK (
+  tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)
+);
+
+-- ---------------------------------------------------------------------------
+-- Invention workspace (S04)
+-- ---------------------------------------------------------------------------
+DO $$
+DECLARE
+  table_name text;
+BEGIN
+  FOREACH table_name IN ARRAY ARRAY[
+    'invention_extractions',
+    'invention_elements',
+    'invention_questions',
+    'invention_answers',
+    'development_tasks',
+    'mechanism_suggestions',
+    'invention_analyses',
+    'contributions',
+    'chronology_events',
+    'embodiments',
+    'matter_rules',
+    'release_choices',
+    'imported_references',
+    'research_queries',
+    'alternatives',
+    'export_manifests',
+    'filing_receipts',
+    'office_actions',
+    'docket_deadlines',
+    'response_drafts',
+    'ids_candidates',
+    'watch_plans',
+    'security_observations',
+    'benchmark_reports',
+    'gate_evaluations',
+    'gate_releases',
+    'commercial_assessments',
+    'claim_drafts',
+    'embodiment_conflicts',
+    'claim_support',
+    'claim_limitations',
+    'prior_art_findings',
+    'eligibility_reviews',
+    'specification_sections',
+    'specification_figures',
+    'terminology'
+  ]
+  LOOP
+    EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', table_name);
+    EXECUTE format('DROP POLICY IF EXISTS %I ON public.%I', table_name || '_all', table_name);
+    EXECUTE format(
+      'CREATE POLICY %I ON public.%I USING (tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id)) WITH CHECK (tenant_id = public.app_current_tenant() AND public.app_can_access_matter(matter_id))',
+      table_name || '_all',
+      table_name
+    );
+  END LOOP;
+END $$;
 
 -- ---------------------------------------------------------------------------
 -- Application-role grants (non-owner; RLS-enforced). Auth tables have no RLS

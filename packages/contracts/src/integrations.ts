@@ -64,8 +64,23 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     label: "Private artifact storage (S3 + KMS)",
     category: "storage",
     slice: "S02",
-    requiredEnv: ["S3_BUCKET", "S3_REGION", "KMS_KEY_ID"],
-    description: "Immutable object versions with restricted, encrypted, signed access.",
+    requiredEnv: [
+      "S3_BUCKET",
+      "S3_REGION",
+      "KMS_KEY_ID",
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY",
+    ],
+    description:
+      "Immutable object versions with restricted, encrypted, signed access. A local directory does not satisfy this.",
+  },
+  {
+    id: "local_object_store",
+    label: "Local development object store",
+    category: "storage",
+    slice: "S02",
+    requiredEnv: ["OBJECT_STORE_LOCAL_DIR"],
+    description: "Explicit filesystem driver for development. Never reported as S3.",
   },
   {
     id: "workers",
@@ -80,8 +95,9 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     label: "AI model routes (AI Gateway / provider)",
     category: "model_routes",
     slice: "S04+",
-    requiredEnv: ["AI_GATEWAY_API_KEY"],
-    description: "Approved, bounded model routes behind an application adapter.",
+    requiredEnv: ["AI_GATEWAY_API_KEY", "AI_INTAKE_MODEL"],
+    description:
+      "Approved model route. Both the gateway key and an explicit model id are required.",
   },
   {
     id: "uspto",
@@ -89,7 +105,8 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     category: "research_sources",
     slice: "S06",
     requiredEnv: ["USPTO_API_KEY"],
-    description: "Public patent discovery and record retrieval (exact coverage verified in S06).",
+    description:
+      "No request is sent until an entitled endpoint is verified. A missing or rejected key is not zero matches.",
   },
   {
     id: "epo_ops",
@@ -97,7 +114,8 @@ export const INTEGRATIONS: readonly IntegrationDefinition[] = [
     category: "research_sources",
     slice: "S06",
     requiredEnv: ["EPO_OPS_KEY"],
-    description: "Registered EPO OPS API access under fair-use terms.",
+    description:
+      "No request is sent until an entitled OPS endpoint is verified. A missing or rejected key is not zero matches.",
   },
   {
     id: "billing",

@@ -8,6 +8,125 @@
       "when": 1789070217005,
       "tag": "0000_smiling_franklin_richards",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789070300000,
+      "tag": "0001_matter_policy_and_mfa",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789070400000,
+      "tag": "0002_artifacts",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789070500000,
+      "tag": "0003_runs",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789070600000,
+      "tag": "0004_invention",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1789070700000,
+      "tag": "0005_rights",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1789070800000,
+      "tag": "0006_research",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1789070900000,
+      "tag": "0007_prior_art",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1789071000000,
+      "tag": "0008_claims",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1789071100000,
+      "tag": "0009_alternatives",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1789071200000,
+      "tag": "0010_specification",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1789071300000,
+      "tag": "0011_gates",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1789071400000,
+      "tag": "0012_exports",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1789071500000,
+      "tag": "0013_commercial",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1789071600000,
+      "tag": "0014_filing",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1789071700000,
+      "tag": "0015_operations",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1789071800000,
+      "tag": "0016_security",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1789071900000,
+      "tag": "0017_benchmark",
+      "breakpoints": true
     }
   ]
 }

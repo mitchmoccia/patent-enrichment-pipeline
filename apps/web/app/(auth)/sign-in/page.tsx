@@ -15,10 +15,13 @@ export default function SignInPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error: err } = await authClient.signIn.email({ email, password });
+    const { data, error: err } = await authClient.signIn.email({ email, password });
     setLoading(false);
     if (err) {
       setError(err.message ?? "Sign in failed");
+      return;
+    }
+    if (data && "twoFactorRedirect" in data && data.twoFactorRedirect) {
       return;
     }
     router.push("/app");
@@ -29,7 +32,10 @@ export default function SignInPage() {
     <div className="mx-auto max-w-sm space-y-6">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight text-graphite-900">Sign in</h1>
-        <p className="text-sm text-graphite-500">Access your private matters.</p>
+        <p className="text-sm text-graphite-500">
+          Access your private matters. A verified authenticator code is required before you can
+          change a matter.
+        </p>
       </div>
       <form
         onSubmit={onSubmit}
