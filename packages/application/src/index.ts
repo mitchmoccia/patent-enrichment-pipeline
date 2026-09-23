@@ -1,4 +1,5 @@
 export * from "./accounts";
+export * from "./alternatives";
 export * from "./artifacts";
 export * from "./claims";
 export * from "./context";

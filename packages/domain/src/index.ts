@@ -1,4 +1,10 @@
 export {
+  type AlternativeInput,
+  entersSelectedDisclosure,
+  experimentExecution,
+  rankAlternative,
+} from "./alternatives";
+export {
   assertClaimSet,
   type ClaimDraft,
   type ClaimLimitation,

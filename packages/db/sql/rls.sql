@@ -229,6 +229,7 @@ BEGIN
     'release_choices',
     'imported_references',
     'research_queries',
+    'alternatives',
     'claim_drafts',
     'embodiment_conflicts',
     'claim_support',

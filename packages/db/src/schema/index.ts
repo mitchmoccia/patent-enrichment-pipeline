@@ -1,3 +1,4 @@
+export * from "./alternatives";
 export * from "./analyses";
 export * from "./artifacts";
 export * from "./auth";

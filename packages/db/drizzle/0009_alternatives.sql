@@ -1,0 +1,23 @@
+CREATE TABLE "alternatives" (
+  "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+  "tenant_id" text NOT NULL,
+  "matter_id" uuid NOT NULL,
+  "label" text NOT NULL,
+  "origin" text NOT NULL,
+  "removes_benefit" text,
+  "explanation" text,
+  "partition_tolerant" boolean DEFAULT false NOT NULL,
+  "consistency_assumption" text,
+  "feasibility" text DEFAULT 'unknown' NOT NULL,
+  "rank" text NOT NULL,
+  "rank_reason" text NOT NULL,
+  "in_selected_disclosure" boolean DEFAULT false NOT NULL,
+  "experiment_status" text DEFAULT 'unavailable' NOT NULL,
+  "created_at" timestamp with time zone DEFAULT now() NOT NULL,
+  CONSTRAINT "alternatives_origin" CHECK (origin IN ('person', 'model')),
+  CONSTRAINT "alternatives_feasibility" CHECK (feasibility IN ('unknown', 'plausible', 'implausible')),
+  CONSTRAINT "alternatives_rank" CHECK (rank IN ('not_equivalent', 'candidate')),
+  CONSTRAINT "alternatives_disclosure" CHECK (in_selected_disclosure = false OR origin = 'person'),
+  CONSTRAINT "alternatives_experiment" CHECK (experiment_status = 'unavailable'),
+  CONSTRAINT "alternatives_matter_fk" FOREIGN KEY ("tenant_id","matter_id") REFERENCES "public"."matters"("tenant_id","id") ON DELETE cascade
+);
