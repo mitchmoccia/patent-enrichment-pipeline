@@ -86,6 +86,12 @@ export default async function MatterPage({
           >
             Specification
           </Link>
+          <Link
+            href={`/app/matters/${matter.id}/review`}
+            className="text-sm text-teal-accent hover:underline"
+          >
+            Review
+          </Link>
         </p>
       </div>
 
@@ -178,7 +184,8 @@ export default async function MatterPage({
       <section className="rounded-lg border border-graphite-200 bg-paper-raised p-5">
         <h2 className="text-sm font-medium text-graphite-700">Pipeline gates</h2>
         <p className="mt-1 text-xs text-graphite-500">
-          Pre-filing readiness checks (G00–G13). All pending until their evaluators are implemented.
+          G00–G16 are evaluated on the review page. A pass is a person, and a changed package needs
+          a new release.
         </p>
         <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
           {GATE_CATALOG.filter((g) => g.phase === "pre_filing").map((g) => (

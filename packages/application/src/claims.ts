@@ -151,6 +151,15 @@ export async function patchClaim(
         .set({ status: "stale" })
         .where(eq(schema.claimSupport.claimId, current.id));
     }
+    await tx
+      .update(schema.inventionAnalyses)
+      .set({ status: "stale" })
+      .where(
+        and(
+          eq(schema.inventionAnalyses.matterId, input.matterId),
+          eq(schema.inventionAnalyses.status, "current"),
+        ),
+      );
     if (!row) throw new AppError("POLICY_BLOCKED", "claim patch was not recorded");
     return { ...row, removed };
   });

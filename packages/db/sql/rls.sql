@@ -230,6 +230,8 @@ BEGIN
     'imported_references',
     'research_queries',
     'alternatives',
+    'gate_evaluations',
+    'gate_releases',
     'claim_drafts',
     'embodiment_conflicts',
     'claim_support',

@@ -16,6 +16,20 @@ export {
 } from "./claims";
 export { assertFilingCoversEmbodiment, assertSelfFilerRelease } from "./filing";
 export {
+  assertHumanGateApproval,
+  assertReleaseCapacity,
+  canCarryForward,
+  citationConsensus,
+  digestFor,
+  displayedOutcome,
+  evaluateGate,
+  type GateDecision,
+  type GateFacts,
+  gateIds,
+  policyVersion,
+  releaseCovers,
+} from "./gates";
+export {
   assessEligibility,
   assessFinding,
   type CitedPassage,

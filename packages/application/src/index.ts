@@ -4,6 +4,7 @@ export * from "./artifacts";
 export * from "./claims";
 export * from "./context";
 export * from "./errors";
+export * from "./gates";
 export * from "./human";
 export * from "./invention";
 export * from "./matter-edits";
