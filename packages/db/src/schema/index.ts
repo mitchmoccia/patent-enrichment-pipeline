@@ -1,6 +1,7 @@
 export * from "./analyses";
 export * from "./artifacts";
 export * from "./auth";
+export * from "./claims";
 export * from "./invention";
 export * from "./matters";
 export * from "./research";

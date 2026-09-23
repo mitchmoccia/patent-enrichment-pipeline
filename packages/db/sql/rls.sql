@@ -229,6 +229,9 @@ BEGIN
     'release_choices',
     'imported_references',
     'research_queries',
+    'claim_drafts',
+    'embodiment_conflicts',
+    'claim_support',
     'claim_limitations',
     'prior_art_findings',
     'eligibility_reviews'

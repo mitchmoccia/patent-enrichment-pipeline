@@ -1,5 +1,6 @@
 export * from "./accounts";
 export * from "./artifacts";
+export * from "./claims";
 export * from "./context";
 export * from "./errors";
 export * from "./human";

@@ -1,3 +1,13 @@
+export {
+  assertClaimSet,
+  type ClaimDraft,
+  type ClaimLimitation,
+  categoryMismatch,
+  contradictoryQuantifiers,
+  dependencyCycle,
+  removedLimitations,
+  supportCrossesIncompatible,
+} from "./claims";
 export { assertFilingCoversEmbodiment, assertSelfFilerRelease } from "./filing";
 export {
   assessEligibility,

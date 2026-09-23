@@ -57,6 +57,13 @@
       "when": 1789070900000,
       "tag": "0007_prior_art",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1789071000000,
+      "tag": "0008_claims",
+      "breakpoints": true
     }
   ]
 }
