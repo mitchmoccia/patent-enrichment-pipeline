@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { type Database, schema } from "@patent/db";
 import { eq } from "drizzle-orm";
-import type { AuthorizedContext } from "./context.js";
+import type { AuthorizedContext } from "./context";
 
 /**
  * Resolve the authorization context for an authenticated user. For the S01

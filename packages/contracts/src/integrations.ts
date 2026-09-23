@@ -7,7 +7,7 @@
  * "verified" (real credentials proven with a live test request) is established
  * in each integration's own slice and is therefore false here by design.
  */
-import type { Env } from "./env.js";
+import type { Env } from "./env";
 
 export type IntegrationCategory =
   | "persistence"

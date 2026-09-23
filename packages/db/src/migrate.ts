@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { config } from "dotenv";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
-import { createDb } from "./client.js";
+import { createDb } from "./client";
 
 const here = dirname(fileURLToPath(import.meta.url));
 // Load the workspace-root .env (packages/db/src -> workspace root).

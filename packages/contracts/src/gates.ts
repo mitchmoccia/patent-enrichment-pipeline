@@ -3,7 +3,7 @@
  * PIPELINE_GATES.md. Used to present the pipeline roadmap in the UI. Actual gate
  * evaluation is implemented in later slices; until then every gate is "pending".
  */
-import type { GateId } from "./enums.js";
+import type { GateId } from "./enums";
 
 export type GatePhase = "pre_filing" | "post_filing";
 

@@ -2,8 +2,8 @@ import { createHash } from "node:crypto";
 import { type Database, schema, withTenant } from "@patent/db";
 import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
-import type { AuthorizedContext } from "./context.js";
-import { AppError } from "./errors.js";
+import type { AuthorizedContext } from "./context";
+import { AppError } from "./errors";
 
 export const createMatterInput = z.object({
   title: z.string().trim().min(1, "title is required").max(300),

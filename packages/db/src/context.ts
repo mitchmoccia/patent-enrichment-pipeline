@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import type { Database } from "./client.js";
+import type { Database } from "./client";
 
 /**
  * The minimal identity a query runs under. Derived by the server from the
