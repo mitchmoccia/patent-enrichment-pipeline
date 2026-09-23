@@ -17,12 +17,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" className="font-semibold tracking-tight text-graphite-900">
               Patent Enrichment Platform
             </Link>
-            <nav className="flex gap-6 text-sm text-graphite-700">
+            <nav className="flex items-center gap-6 text-sm text-graphite-700">
               <Link href="/" className="hover:text-teal-accent">
                 Overview
               </Link>
               <Link href="/status" className="hover:text-teal-accent">
                 Integration status
+              </Link>
+              <Link href="/app" className="hover:text-teal-accent">
+                Workspace
+              </Link>
+              <Link
+                href="/sign-in"
+                className="rounded-md bg-teal-accent px-3 py-1.5 font-medium text-white hover:opacity-90"
+              >
+                Sign in
               </Link>
             </nav>
           </div>

@@ -19,6 +19,20 @@ export default function HomePage() {
           . No matter data, model route, patent search, or filing capability is active yet — each
           integration is introduced and verified in its own slice.
         </p>
+        <div className="flex flex-wrap gap-3 pt-1">
+          <Link
+            href="/sign-up"
+            className="rounded-md bg-teal-accent px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+          >
+            Get started
+          </Link>
+          <Link
+            href="/sign-in"
+            className="rounded-md border border-graphite-200 px-4 py-2 text-sm font-medium text-graphite-700 hover:border-teal-accent hover:text-teal-accent"
+          >
+            Sign in
+          </Link>
+        </div>
       </section>
 
       <section className="rounded-lg border border-graphite-200 bg-paper-raised p-6">
