@@ -14,6 +14,13 @@ export {
   removedLimitations,
   supportCrossesIncompatible,
 } from "./claims";
+export {
+  assessCommercial,
+  type CommercialDecision,
+  type CommercialInput,
+  type CommercialRecord,
+  type CommercialStrategy,
+} from "./commercial";
 export { assertFilingCoversEmbodiment, assertSelfFilerRelease } from "./filing";
 export {
   assertHumanGateApproval,

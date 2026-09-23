@@ -233,6 +233,7 @@ BEGIN
     'export_manifests',
     'gate_evaluations',
     'gate_releases',
+    'commercial_assessments',
     'claim_drafts',
     'embodiment_conflicts',
     'claim_support',

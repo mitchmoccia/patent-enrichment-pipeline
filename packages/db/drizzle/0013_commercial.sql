@@ -1,0 +1,21 @@
+CREATE TABLE "commercial_assessments" (
+  "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+  "tenant_id" text NOT NULL,
+  "matter_id" uuid NOT NULL,
+  "buyer" text,
+  "substitute" text,
+  "evidence_request" text,
+  "strategy" text NOT NULL,
+  "decision" text NOT NULL,
+  "product_revenue_microusd" text,
+  "product_cost_microusd" text,
+  "patent_cost_microusd" text,
+  "product_cashflow_microusd" text,
+  "incremental_patent_value_microusd" text,
+  "unknowns" jsonb NOT NULL,
+  "created_at" timestamp with time zone DEFAULT now() NOT NULL,
+  CONSTRAINT "commercial_assessments_strategy" CHECK (strategy IN ('operating', 'licensing_or_sale', 'defensive')),
+  CONSTRAINT "commercial_assessments_decision" CHECK (decision IN ('proceed', 'revise', 'defer', 'stop')),
+  CONSTRAINT "commercial_assessments_incremental" CHECK (incremental_patent_value_microusd IS NULL),
+  CONSTRAINT "commercial_assessments_matter_fk" FOREIGN KEY ("tenant_id","matter_id") REFERENCES "public"."matters"("tenant_id","id") ON DELETE cascade
+);

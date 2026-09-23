@@ -121,6 +121,10 @@ async function factsOf(
   const liveExport = manifests.some(
     (row) => row.packageDigest === packageDigest && row.expiresAt.getTime() > Date.now(),
   );
+  const commercial = await tx
+    .select({ id: schema.commercialAssessments.id })
+    .from(schema.commercialAssessments)
+    .where(eq(schema.commercialAssessments.matterId, matterId));
   return {
     trainingUseAllowed: policy ? policy.trainingUseAllowed === true : null,
     budgetSet: Boolean(matter.runBudgetMicrousd),
@@ -152,7 +156,7 @@ async function factsOf(
     staleSupport: claims.filter((claim) => claim.supportStatus === "stale").length,
     claimCount: claims.length,
     sectionKinds: sections.map((section) => section.kind),
-    commercialRecorded: false,
+    commercialRecorded: commercial.length > 0,
     exportDigest: liveExport ? packageDigest : null,
     receiptVerified: false,
     officeAction: false,
