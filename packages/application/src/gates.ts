@@ -31,7 +31,7 @@ function sha(value: unknown): string {
 
 type Tx = Parameters<Parameters<Database["transaction"]>[0]>[0];
 
-async function digests(tx: Tx, matterId: string) {
+export async function matterDigests(tx: Tx, matterId: string) {
   const claims = await tx
     .select()
     .from(schema.claimDrafts)
@@ -113,6 +113,14 @@ async function factsOf(
   const superseded = rules.some(
     (rule) => sources.find((source) => source.sourceKey === rule.sourceKey)?.supersededBy,
   );
+  const { packageDigest } = await matterDigests(tx, matterId);
+  const manifests = await tx
+    .select()
+    .from(schema.exportManifests)
+    .where(eq(schema.exportManifests.matterId, matterId));
+  const liveExport = manifests.some(
+    (row) => row.packageDigest === packageDigest && row.expiresAt.getTime() > Date.now(),
+  );
   return {
     trainingUseAllowed: policy ? policy.trainingUseAllowed === true : null,
     budgetSet: Boolean(matter.runBudgetMicrousd),
@@ -145,7 +153,7 @@ async function factsOf(
     claimCount: claims.length,
     sectionKinds: sections.map((section) => section.kind),
     commercialRecorded: false,
-    exportDigest: null,
+    exportDigest: liveExport ? packageDigest : null,
     receiptVerified: false,
     officeAction: false,
     watchPlan: false,
@@ -158,7 +166,7 @@ export async function evaluateGates(db: Database, ctx: AuthorizedContext, matter
     const matter = await lockMatter(tx, matterId);
     await requireEditor(tx, matterId, ctx.userId);
     const facts = await factsOf(tx, matterId, matter);
-    const { claimDigest, packageDigest } = await digests(tx, matterId);
+    const { claimDigest, packageDigest } = await matterDigests(tx, matterId);
     const rows = [];
     for (const gateId of gateIds) {
       const decision = evaluateGate(gateId, facts);
@@ -204,7 +212,7 @@ export async function approveGate(
     if (decision.outcome === "fail") {
       throw new AppError("GATE_BLOCKED", decision.explanation);
     }
-    const { claimDigest, packageDigest } = await digests(tx, input.matterId);
+    const { claimDigest, packageDigest } = await matterDigests(tx, input.matterId);
     const [row] = await tx
       .insert(schema.gateEvaluations)
       .values({
@@ -247,7 +255,7 @@ export async function releasePackage(
       .map((gateId) => evaluateGate(gateId, facts))
       .find((decision) => decision.outcome === "fail");
     if (blocking) throw new AppError("GATE_BLOCKED", blocking.explanation);
-    const { claimDigest, packageDigest } = await digests(tx, input.matterId);
+    const { claimDigest, packageDigest } = await matterDigests(tx, input.matterId);
     const [release] = await tx
       .insert(schema.gateReleases)
       .values({
@@ -280,7 +288,7 @@ export async function getGates(db: Database, ctx: AuthorizedContext, matterId: s
   return withTenant(db, ctx, async (tx) => {
     const [matter] = await tx.select().from(schema.matters).where(eq(schema.matters.id, matterId));
     if (!matter) return null;
-    const { claimDigest, packageDigest } = await digests(tx, matterId);
+    const { claimDigest, packageDigest } = await matterDigests(tx, matterId);
     const evaluations = await tx
       .select()
       .from(schema.gateEvaluations)

@@ -230,6 +230,7 @@ BEGIN
     'imported_references',
     'research_queries',
     'alternatives',
+    'export_manifests',
     'gate_evaluations',
     'gate_releases',
     'claim_drafts',
