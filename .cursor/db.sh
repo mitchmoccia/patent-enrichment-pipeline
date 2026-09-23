@@ -57,6 +57,13 @@ fi
 if "$PG_BIN/pg_ctl" -D "$PGDATA" status >/dev/null 2>&1; then
   log "PostgreSQL already running"
 else
+  # A snapshot taken while Postgres was running bakes in a stale postmaster.pid.
+  # The server is not actually running here (pg_ctl status failed above), so
+  # remove it to avoid a "another server might be running" warning on boot.
+  if [[ -f "$PGDATA/postmaster.pid" ]]; then
+    log "Removing stale postmaster.pid"
+    rm -f "$PGDATA/postmaster.pid"
+  fi
   log "Starting PostgreSQL (log: $PG_LOG)"
   "$PG_BIN/pg_ctl" -D "$PGDATA" -l "$PG_LOG" \
     -o "-p $PGPORT -k /tmp" -w start >/dev/null
